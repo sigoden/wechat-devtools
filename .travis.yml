@@ -2,21 +2,19 @@ language: minimal
 
 dist: xenial
 
-sudo: required
+env:
+  - LANG=zh_CN.utf8
 
-script: ./build.sh
+before_script:
+  - sudo bash ./.travis/7z.sh
 
-after_script: tar -czf wechat-devtools.tar.gz ./dist
-
-before_deploy:
-  - git config --local user.name "sigoden"
-  - git config --local user.email "sigoden@gmail.com"
-  - export TRAVIS_TAG=${cat ./version}
-  - git commit -am 'ci-commit'
-  - git tag $TRAVIS_TAG
-
+script:
+  - ./build.sh
+  - ./.travis/push.sh
 deploy:
   provider: releases
   api_key: $GT_TOKEN
-  file: wechat-devtools.tar.gz
+  file_glob: true
+  file: wechat-devtools-*.tar.gz
   skip_cleanup: true
+  overwrite: true

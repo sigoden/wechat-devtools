@@ -43,10 +43,10 @@ cd wechat-devtools.git
 
 - 从 [Github Release](https://github.com/sigoden/wechat-devtools/releases) 下载
 ```sh
-tar xf wechat-tools.tgz # 解压生成 ./dist 目录
-./dist/launch.sh # 运行
+tar xf wechat-tools-$version.tgz # 解压生成 ./wechat-tools-$version 目录
+./wechat-tools-$version/launch.sh # 运行
 ```
-> `./dist/install-desktop.sh`: 安装桌面图标 wechat_devtools.desktop 文件
+> `install-desktop.sh`: 安装桌面图标 wechat_devtools.desktop 文件
 
 ## 卸载
 

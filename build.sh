@@ -20,16 +20,18 @@ tmp_dir="/tmp/wx"
 mkdir -p "$tmp_dir"
 
 # wechat_devtools.exe
+echo "开始下载 wecaht_web_devtools.exe"
 exe_file="$tmp_dir/wechat_web_devtools.exe"
 wget_maybe 'https://servicewechat.com/wxa-dev-logic/download_redirect?type=x64&from=mpwiki' $exe_file
 exe_dir="$tmp_dir/wechat_web_devtools_exe"
 app_data_dir='$APPDATA/Tencent/微信web开发者工具/package.nw'
-7z x "$exe_file" -o"$exe_dir" -y $app_data_dir
+7z x "$exe_file" -scswin -o"$exe_dir" -y $app_data_dir
 package_dir="$exe_dir/$app_data_dir"
 package_nw_dir="$dist_dir/package.nw"
 cp -r "$package_dir" "$dist_dir"
 
-# nw
+# nwjs
+echo "开始下载 nwjs"
 nw_file="$tmp_dir/nwjs.tar.gz"
 wget_maybe "https://npm.taobao.org/mirrors/nwjs/v$nwjs_v/nwjs-sdk-v$nwjs_v-linux-x64.tar.gz" "$nw_file"
 tar -xf "$nw_file" -C "$tmp_dir"
@@ -38,6 +40,7 @@ nw_dir="$tmp_dir/nwjs-sdk-v$nwjs_v-linux-x64"
 cp -r "$nw_dir"/* "$dist_dir"
 
 # node
+echo "开始下载 node"
 node_file="$tmp_dir/nodejs.tar.gz"
 wget_maybe "https://nodejs.org/download/release/v$node_v/node-v$node_v-linux-x64.tar.gz" "$node_file"
 tar -xf "$node_file" -C "$tmp_dir"
