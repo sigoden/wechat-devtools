@@ -23,8 +23,8 @@ nodegit() {
     cd "$package_dir"
     nodegit_v=$(npm info nodegit version)
     nodegit_dir=$app_dir/package.nw/node_modules/nodegit
-    mkdir -p /tmp/wx && cd /tmp/wx
-    npm i nodegit@$nodegit_v 
+    cd /tmp
+    npm i --production nodegit@$nodegit_v 
     rm -rf $nodegit_dir && mv /tmp/node_modules/nodegit $nodegit_dir
 }
 echo "开始重新构建 nodegit" 

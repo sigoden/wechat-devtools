@@ -51,8 +51,8 @@ cp -r "$node_dir" "$dist_dir/node-$node_v"
 # 复制脚本
 cp "$root_dir"/scripts/*.sh "$dist_dir"
 
+# 重新编译 node c/c++ 模块
+bash "$dist_dir"/rebuild-native-modules.sh
+
 # 打印版本
 echo $version > "$root_dir/version"
-
-# 重新编译 node c/c++ 模块
-bash "$dist_dir"/fix.sh
