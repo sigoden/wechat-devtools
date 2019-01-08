@@ -2,7 +2,7 @@ version: "3"
 services:
   devtools:
     image: sigoden/wechat-devtools
-    privileged: true
+    user: node
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - $HOME/.config/微信web开发者工具:/home/node/.config/微信web开发者工具

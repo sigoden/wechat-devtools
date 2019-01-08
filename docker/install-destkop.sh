@@ -11,7 +11,7 @@ cat > $HOME/.local/share/applications/wechat_devtools.desktop << EOF
 Name=微信web开发者工具
 Comment=The development tools for wechat web develop
 Categories=Development;WebDevelopment;IDE;
-Exec=$root_dir/launch.sh %U
+Exec=$root_dir/launch.sh
 Icon=$root_dir/logo@2x.png
 Type=Application
 Terminal=false

@@ -25,8 +25,7 @@
 ubuntu18.04 安装如下
 
 ```sh
-sudo apt-get install wine-binfmt wine-stable
-sudo update-binfmts --import /usr/share/binfmts/wine # 默认使用 wine 处理 exe 文件
+sudo apt-get install wine-stable
 ```
 
 ### 获取工具
@@ -44,7 +43,7 @@ cd wechat-devtools.git
 
 #### 从 [Release](https://github.com/sigoden/wechat-devtools/releases) 下载
 ```sh
-tar xf wechat-devtools-$ver.tgz # 解压生成 ./dist 目录
+tar xf wechat-devtools-$ver.tar.xz # 解压生成 ./dist 目录
 ./dist/launch.sh # 运行
 ```
 > `./dist/install-desktop.sh`: 安装桌面图标 wechat_devtools.desktop 文件
@@ -78,10 +77,12 @@ docker pull sigoden/wechat-devtools
 ```sh
 docker run  \
     -d \
-    --privileged \
-    -v /tmp/.X11-unix:/tmp/.X11-unix \
-    -v "$HOME/.config/微信web开发者工具:/home/node/.config/微信web开发者工具" \
+    --user node \
     -e DISPLAY \
+    -e LANG=C.UTF-8 \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    $( test -e $HOME/weapp && echo "-v $HOME/weapp:/home/node/weapp" ) \
+    -v $HOME/.config/微信web开发者工具:/home/node/.config/微信web开发者工具 \
     sigoden/wechat-devtools
 ```
 > 见[`docker/launch.sh`](docker/launch.sh) 文件
@@ -96,10 +97,3 @@ docker-compose -f docker/docker-compose.yaml
 ```sh
 ./docker/install-destkop.sh
 ```
-
-### 错误排除
-
-<details>
- <summary>无法启动界面，且 `docker log` 有打印类似 `(nw:20): Gtk-WARNING **: 21:01:27.941: cannot open display: :0.0` ?</summary>
-  x-server 有限制访问权限。运行 `xhost +SI:localuser:$(id -un)` 授权
-</details>

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+apt-get update
+apt-get install -y wget
+
+wget https://github.com/sigoden/wechat-devtools/releases/download/$GIT_TAG/wechat-devtools-$GIT_TAG.tar.xz
+tar -xJf wechat-devtools-$GIT_TAG.tar.xz && mv wechat-devtools-$GIT_TAG dist

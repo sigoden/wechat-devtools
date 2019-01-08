@@ -10,14 +10,15 @@ RUN set -ex; \
 		ca-certificates \
 		curl \
 		wget \
-		libcurl4-openssl-dev \
-		libgl1-mesa-glx \
+		git \
+		libssl1.0-dev \
+		libcurl3-gnutls \
+		libcurl4-nss-dev \
 		libgtk3.0 \
 		libgconf-2-4 \
         libasound2 \
 		libxtst6 \
 		libxss1 \
-		libnss3 \
 	; \
 	dpkg-reconfigure --frontend noninteractive tzdata;
 
@@ -28,14 +29,13 @@ RUN set -ex; \
 	ttf-wqy-microhei \
 	wine-stable \
 	wine32 \
-	wine-binfmt \
 	; \
-    update-binfmts --import /usr/share/binfmts/wine; \
 	rm -rf /var/lib/apt/lists/*;
 
 USER node
 
 COPY --chown=1000:1000 dist /app
-COPY --chown=1000:1000 docker/entrypoint.sh /
 
-CMD /entrypoint.sh
+RUN mkdir -p ~/.config/微信web开发者工具 && ln -s ~/.config/微信web开发者工具 ~/.wine
+
+ENTRYPOINT [ "/app/launch.sh", "--disable-gpu" ]
