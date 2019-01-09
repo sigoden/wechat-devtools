@@ -7,5 +7,5 @@
 apt-get update -q
 apt install -y language-pack-zh-hans build-essential  
 
-wget -O- https://downloads.sourceforge.net/p7zip/p7zip_16.02_src_all.tar.bz2 | tar xz -C /tmp
+wget -O- https://downloads.sourceforge.net/p7zip/p7zip_16.02_src_all.tar.bz2 | tar xj -C /tmp
 (cd /tmp/p7zip_16.02 && make all3 && make install)
