@@ -24,9 +24,10 @@ if $(git diff --name-only | grep -qx version); then # 有新版本
     git push origin master --tags
 else
     git fetch --tags
-    git tag $version > /dev/null 2>&1
-    if [ "$?" -ne "0" ]; then
+    if [ $(git tag -l "$version") ]; then
         git push --delete origin $version
+    else
+        git tag $version
     fi
     git push origin $version
 fi
