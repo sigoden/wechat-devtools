@@ -12,6 +12,6 @@ p7zip_dir="$cache_dir/p7zip_16.02"
 if [ ! -d "$p7zip_dir" ]; then
     p7zip_file="$cache_dir/p7zip_16.02_src_all.tar.bz2"
     wget -O "$p7zip_file" https://downloads.sourceforge.net/p7zip/p7zip_16.02_src_all.tar.bz2
-    tar -xf "$p7zip_file" -C "$cache_dir"
+    tar -xf "$p7zip_file" -C "$cache_dir" && rm -rf "$p7zip_file"
 fi
 cd "$p7zip_dir" && make all3 && make install
