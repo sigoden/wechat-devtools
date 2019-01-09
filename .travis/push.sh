@@ -21,7 +21,8 @@ if $(git diff --name-only | grep -qx version); then # 有新版本
     git add version
     git commit -m "ci: upgrade to $version; [skip ci]"
     git tag $version
-    git push origin master --tags
+    git push origin master
+    git push origin $version
 else
     git fetch --tags
     if [ $(git tag -l "$version") ]; then

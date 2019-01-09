@@ -12,7 +12,7 @@ env:
     - CACHE_DIR=$TRAVIS_BUILD_DIR/.cache
 
 before_script:
-  - sudo bash ./.travis/deps.sh
+  - sudo ./.travis/deps.sh
 
 script:
   - ./build.sh

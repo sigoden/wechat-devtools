@@ -40,12 +40,15 @@ sudo apt-get install wine-stable
 
 > 克隆项目后执行脚本 `build.sh`
 
+
 ```sh
 git clone https://github.com/sigoden/wechat-devtools.git
 cd wechat-devtools.git
-./build.sh # 下载安装 wechat_devtools.exe, nwjs, nodejs，处理后生成 ./dist 目录
+./build.sh # 下载安装 wechat_web_devtools.exe, nwjs, nodejs，处理后生成 ./dist 目录
 ./dist/launch.sh # 运行
 ```
+
+> `build.sh` 使用 `7z` 解压 `wechat_web_devtools.exe` 文件
 
 #### 从 [Release](https://github.com/sigoden/wechat-devtools/releases) 下载
 ```sh
@@ -78,28 +81,37 @@ docker pull sigoden/wechat-devtools
 
 ### 运行容器
 
-方法一， 使用 `docker` 运行
+使用 `docker` 运行
 
 ```sh
 docker run  \
     -d \
     --user node \
     -e DISPLAY \
-    -e LANG=C.UTF-8 \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
-    $( test -e $HOME/weapp && echo "-v $HOME/weapp:/home/node/weapp" ) \
+    -v $HOME/weapp:/home/node/weapp \
     -v $HOME/.config/微信web开发者工具:/home/node/.config/微信web开发者工具 \
     sigoden/wechat-devtools
 ```
-> 见[`docker/launch.sh`](docker/launch.sh) 文件
 
-方法二，使用 `docker-compose` 运行
+使用 `docker-compose` 运行
 
-```sh
-docker-compose -f docker/docker-compose.yaml
+```yaml
+version: "3"
+services:
+  devtools:
+    image: sigoden/wechat-devtools
+    user: node
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - $HOME/.config/微信web开发者工具:/home/node/.config/微信web开发者工具
+      - $HOME/weapp:/home/node/weapp
+    environment:
+      - DISPLAY=$DISPLAY
 ```
 
-方法三，安装并使用桌面图标运行
 ```sh
-./docker/install-destkop.sh
+mkdir -p $HOME/.config/微信web开发者工具
+docker-compose up -d
 ```
+

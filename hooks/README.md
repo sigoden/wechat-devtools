@@ -1,1 +1,0 @@
-Docker Automated Build Hooks
