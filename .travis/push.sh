@@ -23,6 +23,7 @@ if $(git diff --name-only | grep -qx version); then # 有新版本
     git push origin master --tags
 else
     git tag -f $version
+    git remote set-url origin https://sigoden:${GT_TOKEN}@github.com/sigoden/wechat-devtools.git
     git push --delete origin $version
     git push origin $version
 fi

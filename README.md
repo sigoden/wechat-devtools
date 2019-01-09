@@ -1,4 +1,10 @@
-# Linux 微信Web开发者工具
+# Linux, Docker 中运行微信Web开发者工具
+
+![https://travis-ci.org/sigoden/wechat-devtools](https://img.shields.io/travis/sigoden/wechat-devtools.svg)
+![https://github.com/sigoden/wechat-devtools/releases](https://img.shields.io/github/release/sigoden/wechat-devtools.svg)
+![https://hub.docker.com/r/sigoden/wechat-devtools](https://img.shields.io/docker/automated/sigoden/wechat-devtools.svg)
+
+![](https://user-images.githubusercontent.com/4012553/50875629-38fc6300-1404-11e9-8c4c-90dd2e982172.gif)
 
 > 使用 Shell 脚本对 Windows 版`微信Web开发者工具`的基础组件进行兼容处理来实现在 Linux 中运行， 原理图如下:
 

@@ -7,7 +7,9 @@ branches:
     - master
 
 env:
-  - LANG=zh_CN.utf8
+  global:
+    - LANG=zh_CN.utf8
+    - CACHE_DIR=$TRAVIS_BUILD_DIR/.cache
 
 before_script:
   - sudo bash ./.travis/deps.sh
@@ -15,6 +17,10 @@ before_script:
 script:
   - ./build.sh
   - ./.travis/push.sh
+
+cache:
+  directories:
+    - $CACHE_DIR
 
 deploy:
   provider: releases

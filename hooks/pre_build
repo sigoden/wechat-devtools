@@ -7,5 +7,12 @@
 apt-get update
 apt-get install -y wget
 
-wget https://github.com/sigoden/wechat-devtools/releases/download/$GIT_TAG/wechat-devtools-$GIT_TAG.tar.xz
-tar -xJf wechat-devtools-$GIT_TAG.tar.xz && mv wechat-devtools-$GIT_TAG dist
+if [[ $GIT_TAG =~ ^[0-9.]+$ ]]; then
+    version=$GIT_TAG
+else
+    git fetch --tags
+    version=$(git describe $(git rev-list --tags --max-count=1) --tags)
+fi
+
+wget https://github.com/sigoden/wechat-devtools/releases/download/$version/wechat-devtools-$version.tar.xz
+tar -xJf wechat-devtools-$version.tar.xz && mv wechat-devtools-$version dist
