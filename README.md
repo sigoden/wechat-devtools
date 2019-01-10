@@ -48,7 +48,7 @@ cd wechat-devtools.git
 ./dist/launch.sh # 运行
 ```
 
-> `build.sh` 使用 `7z` 解压 `wechat_web_devtools.exe` 文件
+> `build.sh` 使用 `7z` 解压 `wechat_web_devtools.exe` 文件, `7z` 在 Ubuntu 下可以使用 `apt install -y p7zip-full` 安装
 
 #### 从 [Release](https://github.com/sigoden/wechat-devtools/releases) 下载
 ```sh

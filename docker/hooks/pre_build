@@ -15,4 +15,4 @@ else
 fi
 
 wget https://github.com/sigoden/wechat-devtools/releases/download/$version/wechat-devtools-$version.tar.xz
-tar -xJf wechat-devtools-$version.tar.xz && mv wechat-devtools-$version dist
+tar -xJf wechat-devtools-$version.tar.xz && mv wechat-devtools-$version "$DIRSTACK/dist"
