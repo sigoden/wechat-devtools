@@ -58,5 +58,8 @@ cp "$root_dir"/scripts/*.sh "$dist_dir"
 # 重新编译 node c/c++ 模块
 bash "$dist_dir"/rebuild-native-modules.sh
 
+# 封装 exe
+bash "$dist_dir"/wrap-exe.sh
+
 # 打印版本
 echo $version > "$root_dir/version"
