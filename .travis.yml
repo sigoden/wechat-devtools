@@ -16,7 +16,7 @@ before_script:
 
 script:
   - ./build.sh
-  - ./.travis/push.sh
+  - source ./.travis/push.sh
 
 cache:
   directories:
@@ -25,8 +25,7 @@ cache:
 deploy:
   provider: releases
   api_key: $GT_TOKEN
-  file_glob: true
-  file: wechat-devtools-*.tar.xz
+  file: $GZ_FILE
   skip_cleanup: true
   overwrite: true
   on:

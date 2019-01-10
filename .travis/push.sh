@@ -24,13 +24,9 @@ if $(git diff --name-only | grep -qx version); then # 有新版本
     git push origin master
     git push origin $version
 else
-    git fetch --tags
-    if [ $(git tag -l "$version") ]; then
-        git push --delete origin $version
-    else
-        git tag $version
-    fi
-    git push origin $version
+    git tag -f $version
+    git push origin $version --force
 fi
+export TRAVIS_TAG=$version
 
 echo "上传新版本"
