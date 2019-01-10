@@ -23,10 +23,15 @@ if $(git diff --name-only | grep -qx version); then # 有新版本
     git tag $version
     git push origin master
     git push origin $version
+    export TRAVIS_TAG=$version
+    echo "上传新版本: $version"
 else
-    git tag -f $version
-    git push origin $version --force
+    if $(echo "$TRAVIS_COMMIT_MESSAGE" | grep -qE '\[skip deploy\]'); then
+        unset TRAVIS_TAG
+    else
+        git tag -f $version
+        git push origin $version --force
+        export TRAVIS_TAG=$version
+        echo "复制版本: $version"
+    fi
 fi
-export TRAVIS_TAG=$version
-
-echo "上传新版本"

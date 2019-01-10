@@ -4,9 +4,4 @@
 #  Docker Automated Build Hook
 #
 
-
-if [[ ! $GIT_TAG =~ ^[0-9.]+$ ]]; then
-    version=$(git describe $(git rev-list --tags --max-count=1) --tags)
-    docker tag $IMAGE_NAME $DOCKER_REPO:$SOURCE_COMMIT
-    docker push $DOCKER_REPO:$version
-fi
+docker tag $IMAGE_NAME $DOCKER_REPO:latest

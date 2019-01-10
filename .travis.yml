@@ -30,3 +30,4 @@ deploy:
   overwrite: true
   on:
     branch: master
+    condition: $TRAVIS_TAG =~ ^[0-9.]+$ 
