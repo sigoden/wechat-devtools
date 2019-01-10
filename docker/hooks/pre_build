@@ -7,7 +7,7 @@
 apt-get update
 apt-get install -y wget
 
-version=$(cat ./version)
+version=$(cat ../version)
 
 wget -O- https://github.com/sigoden/wechat-devtools/releases/download/$version/wechat-devtools-$version.tar.xz | tar xj -C /tmp
 mv /tmp/wechat-devtools-$version ../dist
