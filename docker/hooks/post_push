@@ -1,7 +1,11 @@
 #!/bin/bash
 
-#
-#  Docker Automated Build Hook
-#
 
-docker tag $IMAGE_NAME $DOCKER_REPO:latest
+if [ "$CACHE_TAG" = latest ]; then
+    version=$(cat ../version)
+    docker tag $IMAGE_NAME $DOCKER_REPO:$version
+    docker push $DOCKER_REPO:$version
+else
+    docker tag $IMAGE_NAME $DOCKER_REPO:latest
+    docker push $DOCKER_REPO:latest
+fi
