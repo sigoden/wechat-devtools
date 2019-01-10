@@ -2,6 +2,5 @@
 
 version=$(cat ../version)
 
-name=
 curl -fsSL -o-  https://github.com/sigoden/wechat-devtools/releases/download/$version/wechat-devtools-$version.tar.xz | tar xJ -C /tmp/
 mv /tmp/wechat-devtools-$version ../dist
