@@ -4,6 +4,7 @@ RUN groupadd --gid 1000 node \
 	&& useradd --uid 1000 --gid node --shell /bin/bash --create-home node
 
 RUN set -ex; \
+	dpkg --add-architecture i386; \
 	apt-get update; \
 	echo "Asia/Shanghai" > /etc/timezone;  \
 	DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
@@ -20,29 +21,23 @@ RUN set -ex; \
 	libasound2 \
 	libxtst6 \
 	libxss1 \
-	; \
-	dpkg-reconfigure --frontend noninteractive tzdata;
-
-RUN set -ex; \
-	dpkg --add-architecture i386; \
-	apt-get update; \
-	apt-get install -y --no-install-recommends \ 
 	language-pack-zh-hans \
 	ttf-wqy-microhei \
+	sudo \
 	wine-stable \
 	wine32 \
 	; \
-	rm -rf /var/lib/apt/lists/*;
-
-USER node
+	dpkg-reconfigure --frontend noninteractive tzdata; \
+	rm -rf /var/lib/apt/lists/*; \
+	sudo -H -u node wineboot -u;
 
 ENV LANG zh_CN.UTF-8
 
-RUN set -ex; \
-	mkdir -p ~/weapp; \
-	mkdir -p ~/.config/微信web开发者工具; \
-	ln -s ~/.config/微信web开发者工具 ~/.wine; 
+VOLUME [ "/home/node/weapp", "/home/node/.config/微信web开发者工具" ]
 
 COPY --chown=1000:1000 dist /app
+COPY --chown=1000:1000 docker/entrypoint.sh /entrypoint.sh
 
-ENTRYPOINT [ "/app/launch.sh", "--disable-gpu" ]
+ENTRYPOINT [ "/entrypoint.sh" ]
+
+CMD [ "/app/launch.sh", "--disable-gpu" ]

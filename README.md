@@ -86,7 +86,6 @@ docker pull sigoden/wechat-devtools
 ```sh
 docker run  \
     -d \
-    --user node \
     -e DISPLAY \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -v $HOME/weapp:/home/node/weapp \
@@ -101,7 +100,6 @@ version: "3"
 services:
   devtools:
     image: sigoden/wechat-devtools
-    user: node
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - $HOME/.config/微信web开发者工具:/home/node/.config/微信web开发者工具
@@ -109,9 +107,3 @@ services:
     environment:
       - DISPLAY=$DISPLAY
 ```
-
-```sh
-mkdir -p $HOME/.config/微信web开发者工具
-docker-compose up -d
-```
-
