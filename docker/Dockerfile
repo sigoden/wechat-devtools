@@ -1,7 +1,6 @@
 FROM ubuntu:18.04
 
-RUN groupadd --gid 1000 node \
-	&& useradd --uid 1000 --gid node --shell /bin/bash --create-home node
+LABEL maintainer="Sigoden Huang <sigoden@gmail.com>"
 
 RUN set -ex; \
 	dpkg --add-architecture i386; \
@@ -28,15 +27,21 @@ RUN set -ex; \
 	wine32 \
 	; \
 	dpkg-reconfigure --frontend noninteractive tzdata; \
-	rm -rf /var/lib/apt/lists/*; \
-	sudo -H -u node wineboot -u;
+	rm -rf /var/lib/apt/lists/*;
 
-ENV LANG zh_CN.UTF-8
+ENV LANG=zh_CN.UTF-8 \
+	GID=1000 \
+	UID=1000
+
+RUN set -ex; \
+	groupadd --gid $GID node; \
+	useradd --uid $UID --gid node --shell /bin/bash --create-home node; \
+	sudo -H -u node wineboot -u
 
 VOLUME [ "/home/node/weapp", "/home/node/.config/微信web开发者工具" ]
 
-COPY --chown=1000:1000 dist /app
-COPY --chown=1000:1000 docker/entrypoint.sh /entrypoint.sh
+COPY dist /app
+COPY docker/entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT [ "/entrypoint.sh" ]
 

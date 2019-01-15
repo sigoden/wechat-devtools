@@ -106,4 +106,7 @@ services:
       - $HOME/weapp:/home/node/weapp
     environment:
       - DISPLAY=$DISPLAY
+      - LANG=zh_CN.UTF-8 # 可选 默认zh_CN
+      - GID=$GID # 可选 默认1000 主机当前用户 gid 解决挂载目录访问权限问题
+      - UID=$UID # 可选 默认1000 主机当前用户 uid 解决挂载目录访问权限问题
 ```

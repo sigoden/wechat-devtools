@@ -26,8 +26,7 @@ else
     wget -O $exe_file 'https://servicewechat.com/wxa-dev-logic/download_redirect?type=x64&from=mpwiki'
 fi
 7z x "$exe_file" -scswin -o"$exe_dir" -y $app_data_dir
-mv -f "$package_dir" "$dist_dir"
-rm -rf "$exe_dir"
+mv -f "$package_dir" "$dist_dir" && chmod -R 755 "$dist_dir/package.nw" && rm -rf "$exe_dir"
 
 # nwjs
 nw_file="$cache_dir/nwjs_$nwjs_v.tar.gz"
