@@ -51,6 +51,9 @@ node_dir_name="node-v$node_v-linux-x64"
 (cd "$dist_dir" && ln -rfs "$node_dir_name/bin/node" node && ln -rfs "$node_dir_name/bin/node" node.exe && ln -rfs "$node_dir_name/lib/node_modules/npm/bin/npm-cli.js" npm)
 export npm_config_cache="$cache_dir/.npm"
 
+# patch
+sed -i 's/throw b.code=p.VENDOR_MD5_NOT_MATCH,b//' $dist_dir/package.nw/js/*.js 
+
 # 复制脚本
 cp "$root_dir"/scripts/*.sh "$dist_dir"
 
