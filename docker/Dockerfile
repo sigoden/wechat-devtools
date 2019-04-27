@@ -21,6 +21,7 @@ RUN set -ex; \
 	libxtst6 \
 	libxss1 \
 	language-pack-zh-hans \
+    libx11-xcb1 \
 	ttf-wqy-microhei \
 	sudo \
 	wine-stable \
