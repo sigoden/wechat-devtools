@@ -1,5 +1,5 @@
 export node_v=8.8.1
-export nwjs_v=0.26.1
+export nwjs_v=0.24.4
 
 get_wechat_devtools_v() {
     wcwd_download='https://servicewechat.com/wxa-dev-logic/download_redirect?type=x64&from=mpwiki'
