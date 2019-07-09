@@ -16,13 +16,13 @@ mkdir -p "$cache_dir"
 
 # wechat_devtools.exe
 exe_file="$cache_dir/wechat_web_devtools_$version.exe"
-app_data_dir='$APPDATA/Tencent/微信web开发者工具/package.nw'
+app_data_dir='$APPDATA/Tencent/微信开发者工具/package.nw'
 exe_dir="$cache_dir/wechat_web_devtools_${version}_exe"
 package_dir="$exe_dir/$app_data_dir"
 if [ -f "$exe_file" ]; then
-    echo "从缓存获取微信Web开发者工具"
+    echo "从缓存获取微信开发者工具"
 else
-    echo "开始下载微信Web开发者工具"
+    echo "开始下载微信开发者工具"
     wget -O $exe_file 'https://servicewechat.com/wxa-dev-logic/download_redirect?type=x64&from=mpwiki'
 fi
 7z x "$exe_file" -scswin -o"$exe_dir" -y $app_data_dir
@@ -50,9 +50,6 @@ tar -xf "$node_file" -C "$dist_dir"
 node_dir_name="node-v$node_v-linux-x64"
 (cd "$dist_dir" && ln -rfs "$node_dir_name/bin/node" node && ln -rfs "$node_dir_name/bin/node" node.exe && ln -rfs "$node_dir_name/lib/node_modules/npm/bin/npm-cli.js" npm)
 export npm_config_cache="$cache_dir/.npm"
-
-# patch
-sed -i 's/throw b.code=p.VENDOR_MD5_NOT_MATCH,b//' $dist_dir/package.nw/js/*.js 
 
 # 复制脚本
 cp "$root_dir"/scripts/*.sh "$dist_dir"
